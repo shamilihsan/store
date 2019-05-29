@@ -9,6 +9,11 @@ const router = express.Router()
 router.get('/user', authController.getUser)
 
 //POST => /auth/user
-router.post('/user', authController.postUser)
+router.post('/user', [
+    body('username').trim().isLength({ min: 5 }),
+    body('email').isEmail().withMessage('Please enter valid email').normalizeEmail
+],
+    authController.postUser
+)
 
 module.exports = router;
