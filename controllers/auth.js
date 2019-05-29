@@ -20,9 +20,9 @@ exports.postUser = (req, res, next) => {
         throw error
     }
 
-    const email = req.body.email;
-    const password = req.body.password;
-    const name = req.body.name;
+    const email = req.body.email
+    const password = req.body.password
+    const name = req.body.name
 
     bcrypt
     .hash(password, 15)
