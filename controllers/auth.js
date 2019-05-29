@@ -14,12 +14,10 @@ exports.postUser = (req, res, next) => {
     
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res
-            .status(422)
-            .json(
-                {
-                    message: 'Validation failed. Entered user details is incorrect', errors: errors.array()
-                })
+        const error = new Error('Validation failed during signing up')
+        error.statusCode = 422
+        error.data = errors.array()
+        throw error
     }
 
     const email = req.body.email;
@@ -41,6 +39,11 @@ exports.postUser = (req, res, next) => {
             message: 'User saved successfully',
             user: result
         })
-    }).catch(err => console.log(err))
-    
+    }).catch(err => {
+        if (!err.statusCode) {
+            err.statusCode = 500
+        }
+        next(err)
+    })
+
 }
