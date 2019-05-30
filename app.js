@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 const authRouters = require('./routes/auth')
+const itemRouters = require('./routes/item')
 
 const app = express()
 
@@ -19,6 +20,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/auth', authRouters)
+app.use('/', itemRouters)
 
 // Error handling middleware
 app.use((error, req, res, next) => {
