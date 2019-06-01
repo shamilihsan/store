@@ -83,5 +83,27 @@ exports.updateItem = (req, res, next) => {
 }
 
 exports.deleteItem = (req, res, next) => {
-    res.status(200).json({ message: "Deleted item brah" })
+    const errors = validationResult(req);
+    const name = req.body.name
+
+    Item.findOne({ name: name })
+        .then(item => {
+            if (!item) {
+                const error = new Error('An item with the name ' + name + ' does not exist')
+                error.statusCode = 422
+                error.data = errors.array()
+                throw error
+            }
+
+            return Item.findOneAndDelete({ name: name })
+        })
+        .then(result => {
+            res.status(200).json({ message: "Deleted item", item: result })
+        })
+        .catch(err => {
+            if (!err.statusCode) {
+                err.statusCode = 500
+            }
+            next(err)
+        })
 }
