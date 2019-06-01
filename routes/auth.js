@@ -7,10 +7,10 @@ const authController = require('../controllers/auth')
 
 const router = express.Router()
 
-//GET => /auth/user
+//GET => /auth/user {email, password}
 router.get('/user', authController.getUser)
 
-//POST => /auth/user
+//POST => /auth/user {email, password, name}
 router.post('/user', [
     body('name').trim().isLength({ min: 5 }),
     body('password').trim().isLength({ min: 3 }),
@@ -28,5 +28,8 @@ router.post('/user', [
 ],
     authController.postUser
 )
+
+//DELETE => /auth/deleteuser {email}
+router.delete('/user', authController.deleteUser)
 
 module.exports = router;
