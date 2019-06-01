@@ -30,6 +30,11 @@ router.post('/user', [
 )
 
 //DELETE => /auth/deleteuser {email}
-router.delete('/user', authController.deleteUser)
+router.delete('/user', [
+    body('email')
+        .isEmail()
+        .withMessage('Please enter valid email to delete')
+        .normalizeEmail()
+], authController.deleteUser)
 
 module.exports = router;
