@@ -11,7 +11,17 @@ exports.getItem = (req, res, next) => {
 }
 
 exports.getItems = (req, res, next) => {
-    res.status(200).json({ message: "Got items brah" })
+
+    Item.find()
+        .then(items => {
+            res.status(200).json({ items: items })
+        })
+        .catch(err => {
+            if (!err.statusCode) {
+                err.statusCode = 500
+            }
+            next(err)
+        })
 }
 
 exports.postItem = (req, res, next) => {
