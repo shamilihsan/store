@@ -8,10 +8,10 @@ const router = express.Router()
 //GET => /items
 router.get('/items', itemController.getItems)
 
-//GET => /item
+//GET => /item {name}
 router.get('/item', itemController.getItem)
 
-//POST => /item
+//POST => /item {name, price, description}
 router.post('/item', itemController.postItem)
 
 //PUT => /item

@@ -4,10 +4,29 @@ const jwt = require('jsonwebtoken')
 
 const Item = require('../models/item')
 
-var hashkey = 'secretkey';
+var hashkey = 'secretkey'
 
 exports.getItem = (req, res, next) => {
-    res.status(200).json({ message: "Got an item brah" })
+    const errors = validationResult(req)
+    const name = req.body.name
+
+    Item.findOne({ name: name })
+        .then(item => {
+            if (!item) {
+                const error = new Error('An item with the name ' + name + ' does not exist')
+                error.statusCode = 422
+                error.data = errors.array()
+                throw error
+            }
+
+            res.status(200).json({ item: item })
+        })
+        .catch(err => {
+            if (!err.statusCode) {
+                err.statusCode = 500
+            }
+            next(err)
+        })
 }
 
 exports.getItems = (req, res, next) => {
