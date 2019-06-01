@@ -15,16 +15,31 @@ exports.getItems = (req, res, next) => {
 }
 
 exports.postItem = (req, res, next) => {
+    const errors = validationResult(req);
 
     const name = req.body.name
     const price = req.body.price
     const description = req.body.description
 
     Item.findOne({ name: name })
-        .then( item => {
-            if(item){
+        .then(isitem => {
+            if (isitem) {
                 const error = new Error('An item with the name ' + name + ' already exists')
+                error.statusCode = 422
+                error.data = errors.array()
+                throw error
             }
+
+            const item = new Item({
+                name: name,
+                price: price,
+                description: description
+            })
+
+            return item.save()
+        })
+        .then(result => {
+            res.status(201).json({ message: 'Added item successfully', item: result })
         })
         .catch(err => {
             if (!err.statusCode) {
@@ -32,8 +47,6 @@ exports.postItem = (req, res, next) => {
             }
             next(err)
         })
-
-    res.status(200).json({ message: "Created item brah" })
 }
 
 exports.updateItem = (req, res, next) => {

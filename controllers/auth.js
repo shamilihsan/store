@@ -50,6 +50,7 @@ exports.getUser = (req, res, next) => {
 
 }
 
+//Write condition to check if user already exists
 exports.postUser = (req, res, next) => {
 
     const errors = validationResult(req);
