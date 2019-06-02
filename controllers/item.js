@@ -79,7 +79,28 @@ exports.postItem = (req, res, next) => {
 }
 
 exports.updateItem = (req, res, next) => {
-    res.status(200).json({ message: "Updated item brah" })
+
+    const updatedName = req.body.name
+    const updatedPrice = req.body.price
+    const updatedDescription = req.body.description
+
+    Item.findOne({ name: updatedName })
+        .then(item => {
+            item.name = updatedName
+            item.price = updatedPrice
+            item.description = updatedDescription
+
+            return item.save()
+        })
+        .then(result => {
+            res.status(201).json({ message: 'Updated item successfully', item: result })
+        })
+        .catch(err => {
+            if (!err.statusCode) {
+                err.statusCode = 500
+            }
+            next(err)
+        })
 }
 
 exports.deleteItem = (req, res, next) => {
