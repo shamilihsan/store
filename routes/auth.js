@@ -8,7 +8,7 @@ const authController = require('../controllers/auth')
 const router = express.Router()
 
 //GET => /auth/user {email, password}
-router.get('/login', authController.login)
+router.post('/login', authController.login)
 
 //POST => /auth/user {email, password, name}
 router.post('/user', [
