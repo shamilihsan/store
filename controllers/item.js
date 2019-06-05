@@ -9,7 +9,7 @@ var hashkey = 'secretkey'
 exports.getItem = (req, res, next) => {
     const errors = validationResult(req)
     const name = req.body.name
-
+    
     Item.findOne({ name: name })
         .then(item => {
             if (!item) {
@@ -30,7 +30,7 @@ exports.getItem = (req, res, next) => {
 }
 
 exports.getItems = (req, res, next) => {
-
+    console.log(req.body, 'request body')
     Item.find()
         .then(items => {
             res.status(200).json({ items: items })
