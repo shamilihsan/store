@@ -6,7 +6,7 @@ const User = require('../models/user')
 
 var hashkey = 'secretkey';
 
-exports.getUser = (req, res, next) => {
+exports.login = (req, res, next) => {
 
     const email = req.body.email
     const password = req.body.password
