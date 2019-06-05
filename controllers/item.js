@@ -30,8 +30,6 @@ exports.getItem = (req, res, next) => {
 }
 
 exports.getItems = (req, res, next) => {
-    const authHeader = req.get('Authorization');
-    console.log(authHeader , 'Auth Header')
     Item.find()
         .then(items => {
             res.status(200).json({ items: items })
