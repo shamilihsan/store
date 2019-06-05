@@ -39,7 +39,7 @@ exports.login = (req, res, next) => {
                 { expiresIn: '1h' }
             )
 
-            res.status(200).json({ token: token, userId: loadeduser._id.toString() })
+            res.status(200).json({ token: token, user: loadeduser })
         })
         .catch(err => {
             if (!err.statusCode) {
