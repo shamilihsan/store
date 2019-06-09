@@ -36,7 +36,7 @@ exports.login = (req, res, next) => {
                     userId: loadeduser._id.toString()
                 },
                 hashkey,
-                { expiresIn: '1h' }
+                { expiresIn: '8h' }
             )
 
             res.status(200).json({ token: token, userEmail: loadeduser.email })

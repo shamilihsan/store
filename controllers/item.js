@@ -4,13 +4,11 @@ const jwt = require('jsonwebtoken')
 
 const Item = require('../models/item')
 
-var hashkey = 'secretkey'
-
 exports.getItem = (req, res, next) => {
     const errors = validationResult(req)
-    const name = req.body.name
+    const itemId = req.body.itemId
     
-    Item.findOne({ name: name })
+    Item.findById(itemId)
         .then(item => {
             if (!item) {
                 const error = new Error('An item with the name ' + name + ' does not exist')
