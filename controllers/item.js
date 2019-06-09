@@ -6,13 +6,13 @@ const Item = require('../models/item')
 
 exports.getItem = (req, res, next) => {
     const errors = validationResult(req)
-    const itemId = req.params.itemId
-    console.log(itemId)
+    const itemId = req.query.itemId
+    console.log(req)
     
     Item.findById(itemId)
         .then(item => {
             if (!item) {
-                const error = new Error('An item with the name ' + name + ' does not exist')
+                const error = new Error('An item with the id ' + item + ' does not exist')
                 error.statusCode = 422
                 error.data = errors.array()
                 throw error
