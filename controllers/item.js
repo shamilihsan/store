@@ -48,7 +48,7 @@ exports.postItem = (req, res, next) => {
     const name = req.body.name
     const price = req.body.price
     const description = req.body.description
-
+    
     Item.findOne({ name: name })
         .then(isitem => {
             if (isitem) {
