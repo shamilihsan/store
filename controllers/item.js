@@ -6,7 +6,8 @@ const Item = require('../models/item')
 
 exports.getItem = (req, res, next) => {
     const errors = validationResult(req)
-    const itemId = req.body.itemId
+    const itemId = req.params.itemId
+    console.log(itemId)
     
     Item.findById(itemId)
         .then(item => {
@@ -17,7 +18,7 @@ exports.getItem = (req, res, next) => {
                 throw error
             }
 
-            res.status(200).json({ item: item })
+            res.status(200).json({ message: 'Fetched item', item: item })
         })
         .catch(err => {
             if (!err.statusCode) {

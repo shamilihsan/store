@@ -8,10 +8,10 @@ const itemController = require('../controllers/item')
 const router = express.Router()
 
 //GET => /items
-router.get('/items', isAuth, itemController.getItems)
+router.get('/items', itemController.getItems)
 
 //GET => /item {name}
-router.get('/item', itemController.getItem)
+router.get('/item:itemId', itemController.getItem)
 
 //POST => /item {name, price, description}
 router.post('/item', itemController.postItem)
