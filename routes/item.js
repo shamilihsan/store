@@ -1,12 +1,14 @@
 const express = require('express')
 const { body } = require('express-validator/check')
 
+const isAuth = require('../middleware/is-auth');
+
 const itemController = require('../controllers/item')
 
 const router = express.Router()
 
 //GET => /items
-router.get('/items', itemController.getItems)
+router.get('/items', isAuth, itemController.getItems)
 
 //GET => /item {name}
 router.get('/item', itemController.getItem)
