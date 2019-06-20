@@ -7,7 +7,6 @@ const Item = require('../models/item')
 exports.getItem = (req, res, next) => {
     const errors = validationResult(req)
     const itemId = req.query.itemId
-    console.log(req)
     
     Item.findById(itemId)
         .then(item => {
