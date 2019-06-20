@@ -10,7 +10,7 @@ const OrderSchema = new Schema({
         }
     ],
     total: { 
-        type: String, 
+        type: Number, 
         required: true 
     },
     user: {
