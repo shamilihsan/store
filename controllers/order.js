@@ -44,6 +44,16 @@ exports.addOrder = (req, res, next) => {
 }
 
 exports.getOrders = (req, res, next) => {
-    
+    const userId = req.body.userId;
+    Order.find({ 'user:userId': userId })
+        .then(result => {
+            res.status(200).json({ message: 'Found orders!', orders: result })
+        })
+        .catch(err => {
+            if (!err.statusCode) {
+                err.statusCode = 500
+            }
+            next(err)
+        })
 }
 
