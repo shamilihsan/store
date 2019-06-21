@@ -1,7 +1,9 @@
+const { validationResult } = require('express-validator/check')
 const Order = require('../models/order')
 const User = require('../models/user')
 
 exports.addOrder = (req, res, next) => {
+    const errors = validationResult(req)
 
     const email = req.body.email
     const items = req.body.items
@@ -18,6 +20,7 @@ exports.addOrder = (req, res, next) => {
 
             const order = new Order({
                 items: items,
+                total: total,
                 user: {
                     email: email,
                     userId: user
