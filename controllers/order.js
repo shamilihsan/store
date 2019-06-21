@@ -43,3 +43,7 @@ exports.addOrder = (req, res, next) => {
 
 }
 
+exports.getOrders = (req, res, next) => {
+    
+}
+

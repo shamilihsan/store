@@ -39,7 +39,9 @@ exports.login = (req, res, next) => {
                 { expiresIn: '8h' }
             )
 
-            res.status(200).json({ token: token, userEmail: loadeduser.email })
+            loadeduser = { _id: loadeduser._id, email: loadeduser.email, name: loadeduser.name }
+
+            res.status(200).json({ token: token, user: loadeduser })
         })
         .catch(err => {
             if (!err.statusCode) {
@@ -99,7 +101,7 @@ exports.deleteUser = (req, res, next) => {
                 throw error
             }
 
-            return User.findOneAndDelete({email: email})
+            return User.findOneAndDelete({ email: email })
 
         })
         .then(result => {
