@@ -14,7 +14,7 @@ router.get('/items', itemController.getItems)
 router.get('/item', itemController.getItem)
 
 //POST => /item {name, price, description}
-router.post('/item', itemController.postItem)
+router.post('/item', isAuth, itemController.postItem)
 
 //PUT => /item
 router.put('/item', itemController.updateItem)

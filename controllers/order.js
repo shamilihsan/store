@@ -47,8 +47,8 @@ exports.addOrder = (req, res, next) => {
 }
 
 exports.getOrders = (req, res, next) => {
-    const userId = mongoose.Types.ObjectId(req.body.userId)
-    console.log(userId)
+    const userId = mongoose.Types.ObjectId(req.query.userId)
+    
     Order.find({ 'user.userId': userId })
         .then(result => {
             res.status(200).json({ message: 'Found orders!', orders: result })
