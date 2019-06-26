@@ -16,6 +16,9 @@ router.get('/item', itemController.getItem)
 //POST => /item {name, price, description}
 router.post('/item', isAuth, itemController.postItem)
 
+
+// -------------- Not implemented -----------------
+
 //PUT => /item
 router.put('/item', itemController.updateItem)
 

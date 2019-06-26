@@ -7,7 +7,7 @@ const Item = require('../models/item')
 exports.getItem = (req, res, next) => {
     const errors = validationResult(req)
     const itemId = req.query.itemId
-    
+
     Item.findById(itemId)
         .then(item => {
             if (!item) {
@@ -46,7 +46,7 @@ exports.postItem = (req, res, next) => {
     const name = req.body.name
     const price = req.body.price
     const description = req.body.description
-    
+
     Item.findOne({ name: name })
         .then(isitem => {
             if (isitem) {
@@ -101,22 +101,21 @@ exports.updateItem = (req, res, next) => {
 }
 
 exports.deleteItem = (req, res, next) => {
-    const errors = validationResult(req);
-    const name = req.body.name
+    console.log(req.query.itemId)
+    
+    const itemId = req.query.itemId
 
-    Item.findOne({ name: name })
+    Item.findById(itemId)
         .then(item => {
             if (!item) {
-                const error = new Error('An item with the name ' + name + ' does not exist')
-                error.statusCode = 422
-                error.data = errors.array()
+                const error = new Error('Could not find an item')
+                error.statusCode = 404
                 throw error
             }
-
-            return Item.findOneAndDelete({ name: name })
+            return Item.findByIdAndRemove(itemId)
         })
         .then(result => {
-            res.status(200).json({ message: "Deleted item", item: result })
+            res.status(200).json({ message: 'Item deleted', result: result })
         })
         .catch(err => {
             if (!err.statusCode) {
