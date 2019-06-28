@@ -1,6 +1,4 @@
 const { validationResult } = require('express-validator/check')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
 
 const Item = require('../models/item')
 
@@ -41,7 +39,7 @@ exports.getItems = (req, res, next) => {
 }
 
 exports.postItem = (req, res, next) => {
-    const errors = validationResult(req);
+    const errors = validationResult(req)
 
     const name = req.body.name
     const price = req.body.price
