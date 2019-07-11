@@ -7,7 +7,6 @@ const mongodb = require('mongoDb')
 
 exports.addOrder = (req, res, next) => {
     const errors = validationResult(req)
-
     const email = req.body.email
     const items = req.body.items
     const total = req.body.total
