@@ -99,7 +99,6 @@ exports.updateItem = (req, res, next) => {
 }
 
 exports.deleteItem = (req, res, next) => {
-    console.log(req.query.itemId)
     
     const itemId = req.query.itemId
 

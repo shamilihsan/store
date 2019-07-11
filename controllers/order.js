@@ -42,8 +42,6 @@ exports.addOrder = (req, res, next) => {
             next(err)
         })
 
-    console.log(email, items, total);
-
 }
 
 exports.getOrders = (req, res, next) => {
