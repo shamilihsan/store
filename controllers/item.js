@@ -15,7 +15,7 @@ exports.getItem = (req, res, next) => {
                 throw error
             }
 
-            res.status(200).json({ message: 'Fetched item', item: item })
+            res.status(200).json(item)
         })
         .catch(err => {
             if (!err.statusCode) {
