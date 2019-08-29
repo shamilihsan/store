@@ -11,7 +11,7 @@ const router = express.Router()
 router.get('/items', itemController.getItems)
 
 //GET => /item {name}
-router.get('/item', itemController.getItem)
+router.get('/item/:itemId', itemController.getItem)
 
 //POST => /item {name, price, description}
 router.post('/item', isAuth, itemController.postItem)

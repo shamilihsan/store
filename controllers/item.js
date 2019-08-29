@@ -4,7 +4,7 @@ const Item = require('../models/item')
 
 exports.getItem = (req, res, next) => {
     const errors = validationResult(req)
-    const itemId = req.query.itemId
+    const itemId = req.params.itemId
 
     Item.findById(itemId)
         .then(item => {
