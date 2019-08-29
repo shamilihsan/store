@@ -28,7 +28,7 @@ exports.getItem = (req, res, next) => {
 exports.getItems = (req, res, next) => {
     Item.find()
         .then(items => {
-            res.status(200).json({ items: items })
+            res.status(200).json(items)
         })
         .catch(err => {
             if (!err.statusCode) {
