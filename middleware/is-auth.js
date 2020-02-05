@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
 
     let decodedToken
     try{
-        decodedToken = jwt.verify(token, 'secretkey')
+        decodedToken = jwt.verify(token, hashkey)
     } catch(error) {
         error.statusCode = 401
         throw error
